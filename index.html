@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A little less thinking. A little more doing. A simple to-do list that stays on your device.">
+  <title>todo-please — Make room for doing.</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23c5b8f2' stroke='%2320211f' stroke-width='2'/%3E%3Ctext x='14' y='29' font-family='Georgia' font-style='italic' font-weight='bold' font-size='30'%3Et%3C/text%3E%3C/svg%3E">
+  <style>
+    :root { --paper: #f7f6f0; --ink: #20211f; --muted: #676860; --purple: #ffe924; --lime: #ddf48c; --line: #dadbd2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Arial, Helvetica, sans-serif; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { cursor: pointer; }
+    button:disabled { cursor: default; opacity: .4; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid #7760c0; outline-offset: 5px; }
+    header { max-width: 1120px; margin: auto; padding: 30px 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-size: 25px; font-weight: 800; letter-spacing: -1px; text-decoration: none; }
+    .brand-mark { width: 34px; height: 34px; border: 2px solid var(--ink); border-radius: 50%; display: grid; place-items: center; background: var(--purple); font: italic 800 25px Georgia, serif; letter-spacing: -2px; padding-right: 3px; }
+    main { max-width: 1000px; margin: auto; padding: 40px 24px 70px; }
+    .eyebrow { font: 11px monospace; letter-spacing: 1.8px; text-transform: uppercase; display: flex; align-items: center; gap: 9px; }
+    .dot { width: 7px; height: 7px; background: #6c8440; border-radius: 50%; }
+    .hero { display: grid; grid-template-columns: 1fr 200px; align-items: center; gap: 30px; }
+    h1 { font-size: clamp(52px, 7vw, 86px); line-height: .97; letter-spacing: -5px; margin: 23px 0; font-weight: 800; }
+    h1 span { display: inline-block; position: relative; }
+    h1 span:after { content: ''; position: absolute; left: 0; right: -8px; bottom: -7px; height: 8px; background: var(--purple); transform: rotate(-2deg); }
+    .intro { color: var(--muted); font-size: 17px; line-height: 1.6; margin: 26px 0 36px; }
+    .motion-art { width: 168px; height: 168px; position: relative; transform: rotate(-12deg); }
+    .motion-art:before, .motion-art:after { content: ''; position: absolute; inset: 0; border: 1px solid var(--ink); border-radius: 50%; transform: translate(-10px, 10px); }
+    .motion-art:after { transform: translate(-20px, 20px); }
+    .art-face { height: 100%; border: 1px solid var(--ink); border-radius: 50%; background: var(--lime); display: grid; place-items: center; position: relative; z-index: 1; font-size: 70px; animation: settle 1s ease both; }
+    .art-label { position: absolute; z-index: 2; right: -9px; bottom: 3px; background: var(--ink); color: white; padding: 8px 12px; font: 10px monospace; letter-spacing: 1px; transform: rotate(12deg); }
+    .workspace { border: 1px solid var(--ink); border-radius: 18px; background: #fffefa; overflow: hidden; }
+    .work-head { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px; border-bottom: 1px solid var(--line); }
+    h2 { font-size: 21px; letter-spacing: -.6px; margin: 0; }
+    #date { font: 11px monospace; text-transform: uppercase; color: var(--muted); }
+    .composer { display: flex; align-items: center; gap: 12px; padding: 24px 28px; }
+    .input-wrap { display: flex; align-items: center; gap: 12px; flex: 1; border-bottom: 1px solid #a7a89f; padding: 8px 0 12px; }
+    .plus { font-size: 27px; font-weight: 300; color: #82847a; }
+    #task { width: 100%; min-width: 0; border: 0; background: transparent; outline: none; font-size: 16px; padding: 5px; }
+    .input-wrap:focus-within { border-bottom-color: #7760c0; }
+    .primary { border: 1px solid var(--ink); border-radius: 7px; background: var(--ink); color: white; padding: 14px 18px; transition: transform .2s, background .2s; }
+    .primary:hover { background: #41433c; transform: translateY(-2px); }
+    .filters { padding: 0 28px 18px; display: flex; align-items: center; gap: 5px; }
+    .filter { background: transparent; border: 0; padding: 8px 13px; border-radius: 5px; color: var(--muted); font-size: 13px; }
+    .filter[aria-pressed=true] { background: var(--purple); color: var(--ink); }
+    .filter span { font: 10px monospace; margin-left: 5px; }
+    .clear { margin-left: auto; background: transparent; border: 0; font-size: 12px; color: var(--muted); padding: 8px 0 8px 12px; }
+    #list { list-style: none; margin: 0; padding: 0 28px; }
+    .task-row { display: flex; align-items: center; gap: 14px; padding: 19px 0; border-top: 1px solid var(--line); animation: arrive .25s ease both; }
+    .task-row input[type=checkbox] { appearance: none; width: 22px; height: 22px; border: 1px solid #85877d; border-radius: 50%; flex-shrink: 0; cursor: pointer; margin: 0; display: grid; place-items: center; }
+    .task-row input:checked { background: var(--lime); border-color: var(--ink); }
+    .task-row input:checked:after { content: '✓'; font-size: 15px; }
+    .task-text { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 15px; line-height: 1.4; }
+    .done .task-text { text-decoration: line-through; color: #818379; }
+    .row-action { background: transparent; border: 0; color: #76786e; font-size: 12px; padding: 8px; border-radius: 5px; }
+    .row-action:hover { color: var(--ink); background: #eeeee7; }
+    .empty { padding: 35px 10px 43px; text-align: center; color: var(--muted); }
+    .empty strong { display: block; color: var(--ink); font-size: 21px; margin-bottom: 10px; letter-spacing: -.5px; }
+    .empty p { margin: 0; font-size: 14px; line-height: 1.6; }
+    .work-foot { background: #efefe8; padding: 18px 28px; display: flex; justify-content: space-between; align-items: center; gap: 24px; font: 11px monospace; }
+    .progress { width: 135px; height: 5px; background: #d6d8cc; border-radius: 4px; overflow: hidden; }
+    .progress i { display: block; height: 100%; width: 0; background: #555c39; transition: width .5s ease; }
+    .foot-progress { display: flex; align-items: center; gap: 13px; }
+    .small-note { display: flex; justify-content: space-between; margin: 16px 4px 0; color: var(--muted); font-size: 11px; }
+    .lower { display: flex; justify-content: space-between; gap: 25px; margin-top: 62px; padding-top: 25px; border-top: 1px solid var(--line); }
+    .lower strong { font-size: 20px; letter-spacing: -.5px; }
+    .lower p { max-width: 310px; color: var(--muted); font-size: 13px; line-height: 1.7; margin: 0; }
+    #toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 12px 16px; border-radius: 8px; background: var(--ink); color: white; font-size: 13px; box-shadow: 0 5px 25px #0002; z-index: 5; width: max-content; max-width: 90vw; }
+    #toast button { margin-left: 20px; color: var(--lime); background: none; border: 0; text-decoration: underline; }
+    dialog { border: 1px solid var(--ink); border-radius: 14px; padding: 28px; max-width: 440px; width: calc(100% - 40px); background: var(--paper); }
+    dialog::backdrop { background: #20211f66; backdrop-filter: blur(3px); }
+    dialog label { display: block; margin: 22px 0 8px; }
+    dialog input { width: 100%; padding: 12px; border: 1px solid #999; border-radius: 5px; }
+    .dialog-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+    @keyframes arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes settle { from { transform: rotate(-35deg) scale(.8); } to { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+    @media (max-width: 600px) { header { padding: 24px; } main { padding-top: 28px; } .hero { grid-template-columns: 1fr; } h1 { letter-spacing: -3px; } .motion-art { display: none; } .intro { font-size: 15px; } .work-head, .composer { padding: 20px; } #date { font-size: 9px; } .filters { padding: 0 15px 16px; gap: 0; } .filter { padding: 8px; } #list { padding: 0 20px; } .composer { gap: 10px; } .primary { padding: 13px; } #task { font-size: 14px; } .work-foot { padding: 18px 20px; gap: 10px; } .progress { width: 65px; } .small-note { font-size: 10px; } .lower { margin-top: 40px; flex-direction: column; gap: 12px; } .row-action { padding: 8px 4px; } }
+  </style>
+</head>
+<body>
+  <header><a class="brand" href="./" aria-label="todo-please home"><span class="brand-mark" aria-hidden="true">t</span>todo-please.</a></header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div><h1 id="hero-title">Make room<br>for <span>doing.</span></h1><p class="intro">Get it out of your head. Put it on your list.<br>One small thing at a time.</p></div>
+      <div class="motion-art" aria-hidden="true"><div class="art-face">✓</div></div>
+    </section>
+    <section class="workspace" aria-labelledby="list-title">
+      <div class="work-head"><h2 id="list-title">Your little list.</h2><span id="date"></span></div>
+      <form class="composer" id="add-form"><div class="input-wrap"><span class="plus" aria-hidden="true">+</span><input id="task" aria-label="New task" placeholder="What needs doing?" maxlength="240" autocomplete="off" required></div><button class="primary" type="submit">Add task ↗</button></form>
+      <div class="filters" aria-label="Filter tasks"><button class="filter" data-filter="all" aria-pressed="true">All <span id="count-all">0</span></button><button class="filter" data-filter="active" aria-pressed="false">To do <span id="count-active">0</span></button><button class="filter" data-filter="done" aria-pressed="false">Done <span id="count-done">0</span></button><button class="clear" id="clear" disabled>Clear done</button></div>
+      <ul id="list" aria-label="Tasks"></ul>
+      <div class="empty" id="empty"><strong>A clean slate. Nice.</strong><p>Add your first task above.<br>Big plans start with a little list.</p></div>
+      <div class="work-foot"><span id="remaining" aria-live="polite">0 things to do</span><div class="foot-progress"><span id="percent">0% done</span><div class="progress" role="progressbar" aria-label="Task completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div></div>
+    </section>
+    <div class="small-note"><span id="storage-note">↳ Automatically saved on this device.</span><span>No account. Just you.</span></div>
+    <section class="lower"><strong>Small steps still move you forward.</strong><p>This list can wait when you need a break. Close the tab, make a cup of something, and pick up where you left off.</p></section>
+  </main>
+  <div id="toast" role="status" hidden><span></span><button id="undo">Undo</button></div>
+  <dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-form"><h2 id="edit-title">A little adjustment.</h2><label for="edit-text">Task</label><input id="edit-text" required maxlength="240"><div class="dialog-actions"><button type="button" class="row-action" id="cancel-edit">Cancel</button><button type="submit" class="primary">Save changes</button></div></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
