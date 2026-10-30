@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A little less thinking. A little more doing. A simple to-do list that stays on your device.">
   <title>todo-please — Make room for doing.</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23c5b8f2' stroke='%2320211f' stroke-width='2'/%3E%3Ctext x='14' y='29' font-family='Georgia' font-style='italic' font-weight='bold' font-size='30'%3Et%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261030" sizes="any">
   <style>
     :root { --paper: #f7f6f0; --ink: #20211f; --muted: #676860; --purple: #ffe924; --lime: #ddf48c; --line: #dadbd2; }
     * { box-sizing: border-box; }
@@ -80,9 +80,11 @@
     @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     @media (max-width: 600px) { header { padding: 24px; } main { padding-top: 28px; } .hero { grid-template-columns: 1fr; } h1 { letter-spacing: -3px; } .motion-art { display: none; } .intro { font-size: 15px; } .work-head, .composer { padding: 20px; } #date { font-size: 9px; } .filters { padding: 0 15px 16px; gap: 0; } .filter { padding: 8px; } #list { padding: 0 20px; } .composer { gap: 10px; } .primary { padding: 13px; } #task { font-size: 14px; } .work-foot { padding: 18px 20px; gap: 10px; } .progress { width: 65px; } .small-note { font-size: 10px; } .lower { margin-top: 40px; flex-direction: column; gap: 12px; } .row-action { padding: 8px 4px; } }
   </style>
+
+<style id="collection-brand-mark">.collection-mark{display:block;width:34px;height:34px;flex:0 0 34px;object-fit:contain;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0;margin:0}</style>
 </head>
 <body>
-  <header><a class="brand" href="./" aria-label="todo-please home"><span class="brand-mark" aria-hidden="true">t</span>todo-please.</a></header>
+  <header><a class="brand" href="./" aria-label="todo-please home"><img class="collection-mark" src="favicon.svg?v=20261030" width="34" height="34" alt="" aria-hidden="true">todo-please.</a></header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <div><h1 id="hero-title">Make room<br>for <span>doing.</span></h1><p class="intro">Get it out of your head. Put it on your list.<br>One small thing at a time.</p></div>
