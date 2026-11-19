@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="A little less thinking. A little more doing. A simple to-do list that stays on your device.">
-  <title>todo-please — Make room for doing.</title>
+  <title>Todo Please — Make room for doing.</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261030" sizes="any">
   <style>
     :root { --paper: #f7f6f0; --ink: #20211f; --muted: #676860; --purple: #ffe924; --lime: #ddf48c; --line: #dadbd2; }
@@ -79,6 +79,12 @@
     @keyframes settle { from { transform: rotate(-35deg) scale(.8); } to { transform: none; } }
     @media (prefers-reduced-motion: reduce) { *, *:before, *:after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
     @media (max-width: 600px) { header { padding: 24px; } main { padding-top: 28px; } .hero { grid-template-columns: 1fr; } h1 { letter-spacing: -3px; } .motion-art { display: none; } .intro { font-size: 15px; } .work-head, .composer { padding: 20px; } #date { font-size: 9px; } .filters { padding: 0 15px 16px; gap: 0; } .filter { padding: 8px; } #list { padding: 0 20px; } .composer { gap: 10px; } .primary { padding: 13px; } #task { font-size: 14px; } .work-foot { padding: 18px 20px; gap: 10px; } .progress { width: 65px; } .small-note { font-size: 10px; } .lower { margin-top: 40px; flex-direction: column; gap: 12px; } .row-action { padding: 8px 4px; } }
+    .small-note a { color: inherit; }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: clamp(36px, 10vw, 54px); letter-spacing: -.04em; }
+      #task { font-size: 16px; min-width: 0; }
+      .primary, .filter, .row-action { min-height: 44px; }
+    }
   </style>
 
 <style id="collection-brand-mark">.collection-mark{display:block;width:34px;height:34px;flex:0 0 34px;object-fit:contain;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0;margin:0}</style>
@@ -87,12 +93,12 @@
   <header><a class="brand" href="./" aria-label="todo-please home"><img class="collection-mark" src="favicon.svg?v=20261030" width="34" height="34" alt="" aria-hidden="true">todo-please.</a></header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
-      <div><h1 id="hero-title">Make room<br>for <span>doing.</span></h1><p class="intro">Get it out of your head. Put it on your list.<br>One small thing at a time.</p></div>
+      <div><h1 id="hero-title">Make room<br>for <span>doing.</span></h1><p class="intro">Get it out of your head. Put it on your list.</p></div>
       <div class="motion-art" aria-hidden="true"><div class="art-face">✓</div></div>
     </section>
     <section class="workspace" aria-labelledby="list-title">
       <div class="work-head"><h2 id="list-title">Your little list.</h2><span id="date"></span></div>
-      <form class="composer" id="add-form"><div class="input-wrap"><span class="plus" aria-hidden="true">+</span><input id="task" aria-label="New task" placeholder="What needs doing?" maxlength="240" autocomplete="off" required></div><button class="primary" type="submit">Add task ↗</button></form>
+      <form class="composer" id="add-form"><div class="input-wrap"><span class="plus" aria-hidden="true">+</span><input id="task" aria-label="New task" placeholder="What needs doing?" maxlength="240" autocomplete="off" required></div><button class="primary" type="submit">Add task</button></form>
       <div class="filters" aria-label="Filter tasks"><button class="filter" data-filter="all" aria-pressed="true">All <span id="count-all">0</span></button><button class="filter" data-filter="active" aria-pressed="false">To do <span id="count-active">0</span></button><button class="filter" data-filter="done" aria-pressed="false">Done <span id="count-done">0</span></button><button class="clear" id="clear" disabled>Clear done</button></div>
       <ul id="list" aria-label="Tasks"></ul>
       <div class="empty" id="empty"><strong>A clean slate. Nice.</strong><p>Add your first task above.<br>Big plans start with a little list.</p></div>
@@ -100,6 +106,7 @@
     </section>
     <div class="small-note"><span id="storage-note">↳ Automatically saved on this device.</span><span>No account. Just you.</span></div>
     <section class="lower"><strong>Small steps still move you forward.</strong><a href="https://github.com/aporka-droid/todo-please" target="_blank" rel="noopener noreferrer">GitHub</a></section>
+  <p class="small-note"><a href="https://please.aporka.dev/">All Please apps</a></p>
   </main>
   <div id="toast" role="status" hidden><span></span><button id="undo">Undo</button></div>
   <dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-form"><h2 id="edit-title">A little adjustment.</h2><label for="edit-text">Task</label><input id="edit-text" required maxlength="240"><div class="dialog-actions"><button type="button" class="row-action" id="cancel-edit">Cancel</button><button type="submit" class="primary">Save changes</button></div></form></dialog>
