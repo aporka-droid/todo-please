@@ -88,6 +88,45 @@
   </style>
 
 <style id="collection-brand-mark">.collection-mark{display:block;width:34px;height:34px;flex:0 0 34px;object-fit:contain;border:0;border-radius:0;background:transparent;box-shadow:none;padding:0;margin:0}</style>
+<style>
+.please-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  width: 100%;
+  font: inherit;
+  letter-spacing: normal;
+}
+.please-footer-nav .please-origin {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  color: inherit;
+  font-size: 11px;
+  font-weight: 400;
+}
+.please-footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+.please-footer-nav a.please-wordmark {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.6px;
+}
+.please-footer-nav a:hover,
+.please-footer-nav a:focus-visible {
+  text-decoration: underline;
+}
+
+</style>
 </head>
 <body>
   <header><a class="brand" href="./" aria-label="todo-please home"><img class="collection-mark" src="favicon.svg?v=20261030" width="34" height="34" alt="" aria-hidden="true">todo-please.</a></header>
@@ -105,8 +144,7 @@
       <div class="work-foot"><span id="remaining" aria-live="polite">0 things to do</span><div class="foot-progress"><span id="percent">0% done</span><div class="progress" role="progressbar" aria-label="Task completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div></div></div>
     </section>
     <span id="storage-note" class="small-note" role="status"></span>
-    <section class="lower"><a href="https://github.com/aporka-droid/todo-please" target="_blank" rel="noopener noreferrer">GitHub</a></section>
-  <p class="small-note"><a href="https://please.aporka.dev/">All Please apps</a></p>
+    <footer class="lower"><nav class="please-footer-nav" aria-label="Footer links"><span class="please-origin">A tool from <a class="please-wordmark" href="https://please.aporka.dev/">please.</a></span><a href="https://github.com/aporka-droid/todo-please">GitHub</a></nav></footer>
   </main>
   <div id="toast" role="status" hidden><span></span><button id="undo">Undo</button></div>
   <dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-form"><h2 id="edit-title">Edit task</h2><label for="edit-text">Task</label><input id="edit-text" required maxlength="240"><div class="dialog-actions"><button type="button" class="row-action" id="cancel-edit">Cancel</button><button type="submit" class="primary">Save changes</button></div></form></dialog>
