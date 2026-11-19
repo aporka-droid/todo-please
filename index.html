@@ -93,11 +93,11 @@
   <header><a class="brand" href="./" aria-label="todo-please home"><img class="collection-mark" src="favicon.svg?v=20261030" width="34" height="34" alt="" aria-hidden="true">todo-please.</a></header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
-      <div><h1 id="hero-title">Make room<br>for <span>doing.</span></h1><p class="intro">Get it out of your head. Put it on your list.</p></div>
+      <div><h1 id="hero-title">Manage your <span>tasks</span></h1><p class="intro">Get it out of your head. Put it on your list.</p></div>
       <div class="motion-art" aria-hidden="true"><div class="art-face">✓</div></div>
     </section>
     <section class="workspace" aria-labelledby="list-title">
-      <div class="work-head"><h2 id="list-title">Your little list.</h2><span id="date"></span></div>
+      <div class="work-head"><h2 id="list-title">Your tasks</h2><span id="date"></span></div>
       <form class="composer" id="add-form"><div class="input-wrap"><span class="plus" aria-hidden="true">+</span><input id="task" aria-label="New task" placeholder="What needs doing?" maxlength="240" autocomplete="off" required></div><button class="primary" type="submit">Add task</button></form>
       <div class="filters" aria-label="Filter tasks"><button class="filter" data-filter="all" aria-pressed="true">All <span id="count-all">0</span></button><button class="filter" data-filter="active" aria-pressed="false">To do <span id="count-active">0</span></button><button class="filter" data-filter="done" aria-pressed="false">Done <span id="count-done">0</span></button><button class="clear" id="clear" disabled>Clear done</button></div>
       <ul id="list" aria-label="Tasks"></ul>
@@ -109,7 +109,7 @@
   <p class="small-note"><a href="https://please.aporka.dev/">All Please apps</a></p>
   </main>
   <div id="toast" role="status" hidden><span></span><button id="undo">Undo</button></div>
-  <dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-form"><h2 id="edit-title">A little adjustment.</h2><label for="edit-text">Task</label><input id="edit-text" required maxlength="240"><div class="dialog-actions"><button type="button" class="row-action" id="cancel-edit">Cancel</button><button type="submit" class="primary">Save changes</button></div></form></dialog>
+  <dialog id="edit-dialog" aria-labelledby="edit-title"><form id="edit-form"><h2 id="edit-title">Edit task</h2><label for="edit-text">Task</label><input id="edit-text" required maxlength="240"><div class="dialog-actions"><button type="button" class="row-action" id="cancel-edit">Cancel</button><button type="submit" class="primary">Save changes</button></div></form></dialog>
   <script src="app.js"></script>
 </body>
 </html>
